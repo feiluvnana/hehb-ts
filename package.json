@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev src/index.ts -w"
+    "dev": "start \"\" tsc --watch && start \"\" node --watch dist/index.js",
+    "prepare": "ts-patch install && typia patch"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
@@ -14,15 +15,16 @@
     "eslint-config-prettier": "^10.0.2",
     "globals": "^16.0.0",
     "prettier": "3.5.2",
-    "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.7.3",
+    "ts-patch": "^3.3.0",
+    "tsx": "^4.19.3",
+    "typescript": "~5.7.3",
     "typescript-eslint": "^8.25.0"
   },
   "dependencies": {
     "express": "^4.21.2",
     "mysql2": "^3.12.0",
     "reflect-metadata": "^0.2.2",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.20",
+    "typia": "^7.6.4"
   }
 }

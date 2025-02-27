@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
 
-export let DatabaseSource = new DataSource({
+export let Database = new DataSource({
   type: "mysql",
   host: "localhost",
   port: 3306,
@@ -8,14 +8,14 @@ export let DatabaseSource = new DataSource({
   password: "",
   synchronize: true,
   logging: true,
-  entities: ["**/*.model.ts"],
+  entities: ["**/*.entity.ts"],
   database: "hehb-ts",
 });
 
 export async function initialize() {
   try {
-    await DatabaseSource.initialize().then((source) => (DatabaseSource = source));
+    await Database.initialize().then((source) => (Database = source));
   } catch (e) {
-    console.log("[database] Initialization failed: " + e);
+    console.log("Initialization failed: " + e);
   }
 }
