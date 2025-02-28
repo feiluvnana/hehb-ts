@@ -7,8 +7,9 @@ export let Database = new DataSource({
   username: "root",
   password: "",
   synchronize: true,
+  dropSchema: true,
   logging: true,
-  entities: ["**/*.entity.ts"],
+  entities: ["**/*.entity.js"],
   database: "hehb-ts",
 });
 

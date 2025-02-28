@@ -1,10 +1,11 @@
-import { Router } from "express";
+import { NextFunction, Request, Response, Router } from "express";
 import typia, { IValidation } from "typia";
 import { ValidationError } from "../core/errors";
-import { BulkCreateTagDto } from "../services/tag.service";
+import { BulkCreateTagDto, TagService } from "../services/tag.service";
+import { Database } from "../setup/database.setup";
 
 const r = Router();
-r.post("/tags", (req, res, next) => {
+r.post("/tags", async (req: Request, res: Response, next: NextFunction) => {
   const validation: IValidation<BulkCreateTagDto> = typia.validate<BulkCreateTagDto>(req.body);
   if (!validation.success) {
     return next(
@@ -14,7 +15,15 @@ r.post("/tags", (req, res, next) => {
     );
   }
 
-  res.status(200).json({ message: "Oka" });
+  try {
+    const tags = await Database.transaction(async (manager) => {
+      const tagService = manager.withRepository(TagService);
+      return tagService.bulkCreate(validation.data);
+    });
+    res.status(200).json(tags);
+  } catch (e) {
+    return next(e);
+  }
 });
 
 export const router = r;

@@ -10,6 +10,12 @@ export class ApiError {
   }
 }
 
+export class BadRequestError extends ApiError {
+  constructor(message: string) {
+    super({ type: "BAD_REQUEST_ERROR", message, code: 400 });
+  }
+}
+
 export class NotFoundError extends ApiError {
   constructor(message: string) {
     super({ type: "NOT_FOUND_ERROR", message, code: 404 });

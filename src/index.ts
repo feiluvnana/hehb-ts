@@ -13,6 +13,7 @@ async function main() {
 
   const app = express();
   app.use(urlencoded());
+
   app.use(json());
   const controllerDir = fs.readdirSync(path.join(__dirname, "controllers"));
   for (const f of controllerDir) {
