@@ -9,8 +9,8 @@ export let Database = new DataSource({
   synchronize: true,
   dropSchema: true,
   logging: true,
-  entities: ["**/*.entity.js"],
-  database: "hehb-ts",
+  entities: ["**/*.entity.{ts,js}"],
+  database: "hehb-ts"
 });
 
 export async function initialize() {
